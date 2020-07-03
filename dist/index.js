@@ -360,27 +360,24 @@ function run() {
             const file = core.getInput('kubesec_input_file');
             const url = core.getInput('kubesec_url');
             const minimumScore = parseInt(core.getInput('minimum_score'));
-            core.info(`Reading ${file} ${minimumScore} ...`);
+            core.info(`Reading ${file} ...`);
             const input = fs.readFileSync(file).toString();
-            core.info(input);
             const scanResults = yield kubesec_1.scan(input, url);
             let failed = false;
             for (const scanResult of scanResults) {
                 if (scanResult.score > minimumScore) {
                     failed = true;
                 }
-                core.info(`::Object::${scanResult.object}`);
-                core.info(`::Result::${scanResult.message}`);
-                core.info(`::Score ::${scanResult.score}`);
+                core.info(`:: Object ::${scanResult.object}`);
+                core.info(`:: Result ::${scanResult.message}`);
+                core.info(`:: Score  ::${scanResult.score}`);
                 if (scanResult.scoring && scanResult.scoring.advise && scanResult.scoring.advise.length > 0)
                     for (const advice of scanResult.scoring.advise) {
-                        core.info(`::::Advice for ::${advice.selector}`);
-                        core.info(`::::::${advice.reason}`);
+                        core.info(`:::: Advice for :: ${advice.selector}`);
+                        core.info(`::::            :: ${advice.reason}`);
                     }
             }
-            core.info(`Failed :: ${failed}`);
             if (failed) {
-                core.info('setting failed');
                 core.setFailed(`Score was higher than ${minimumScore}`);
             }
         }

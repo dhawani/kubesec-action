@@ -30,6 +30,20 @@ jobs:
         npm run all
   test: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
+    services:
+      # Label used to access the service container
+      kubesec:
+        # Docker Hub image
+        image: kubesec/kubesec:512c5e0
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "wget --quiet --tries=1 --spider http://localhost:8080/healtz || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps port 6379 on service container to the host
+          - 8080:8080
     steps:
     - uses: actions/checkout@v1
     - uses: ./

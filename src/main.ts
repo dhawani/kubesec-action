@@ -1,15 +1,12 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
+import * as fs from "fs";
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`)
-
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
-
+    const file: string = core.getInput('kubesec_input_file')
+    core.debug(`Reading ${file} ...`)
+    const input = fs.readFileSync(file).toString()
+    core.debug(input)
     core.setOutput('time', new Date().toTimeString())
   } catch (error) {
     core.setFailed(error.message)

@@ -2,9 +2,9 @@ name: 'Your name here'
 description: 'Provide a description here'
 author: 'Your name or organization here'
 inputs:
-  milliseconds:              # change this
-    description: 'input description here'
-    default: 'default value if applicable'
+  kubesec_input_file:
+    description: 'Input file to kubesec'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'

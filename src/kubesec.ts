@@ -8,13 +8,13 @@ interface ScanResult {
   scoring: ScanScoring
 }
 
-interface ScanAdvice {
+interface ScanAdvise {
   selector: string
   reason: string
 }
 
 interface ScanScoring {
-  advice: ScanAdvice[]
+  advise: ScanAdvise[]
 }
 export async function scan(file: string, url: string = 'http://localhost:8080/scan'): Promise<ScanResult[]> {
   const client: restm.HttpClient = new restm.HttpClient('Github Kubescan Action')

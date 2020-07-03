@@ -25,7 +25,11 @@ async function run(): Promise<void> {
           core.info(`::::::${advice.reason}`)
         }
     }
-    if (failed) core.setFailed(`Score was higher than ${minimumScore}`)
+    core.info(`Failed :: ${failed}`)
+    if (failed) {
+      core.info('setting failed')
+      core.setFailed(`Score was higher than ${minimumScore}`)
+    }
   } catch (error) {
     core.setFailed(error.message)
   }

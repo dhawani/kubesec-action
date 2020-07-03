@@ -9,6 +9,10 @@ inputs:
     description: 'URL to kubsec server'
     required: false
     default: 'http://localhost:8080/scan'
+  minimum_score:
+    description: 'Minimum score for passing the scan'
+    default: '0'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

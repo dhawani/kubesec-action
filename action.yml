@@ -5,6 +5,10 @@ inputs:
   kubesec_input_file:
     description: 'Input file to kubesec'
     required: true
+  kubesec_url:
+    description: 'URL to kubsec server'
+    required: false
+    default: 'http://localhost:8080/scan'
 runs:
   using: 'node12'
   main: 'dist/index.js'

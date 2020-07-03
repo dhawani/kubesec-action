@@ -366,7 +366,7 @@ function run() {
             const scanResults = yield kubesec_1.scan(input, url);
             let failed = false;
             for (const scanResult of scanResults) {
-                if (scanResult.score < minimumScore) {
+                if (scanResult.score > minimumScore) {
                     failed = true;
                 }
                 core.info(`::Object::${scanResult.object}`);
@@ -378,8 +378,11 @@ function run() {
                         core.info(`::::::${advice.reason}`);
                     }
             }
-            if (failed)
+            core.info(`Failed :: ${failed}`);
+            if (failed) {
+                core.info('setting failed');
                 core.setFailed(`Score was higher than ${minimumScore}`);
+            }
         }
         catch (error) {
             core.setFailed(error.message);

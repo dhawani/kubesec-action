@@ -15,9 +15,9 @@ async function run(): Promise<void> {
       if (scanResult.score > minimumScore) {
         failed = true
       }
-      core.info(`:: Object ::${scanResult.object}`)
-      core.info(`:: Result ::${scanResult.message}`)
-      core.info(`:: Score  ::${scanResult.score}`)
+      core.info(`:: Object :: ${scanResult.object}`)
+      core.info(`:: Result :: ${scanResult.message}`)
+      core.info(`:: Score  :: ${scanResult.score}`)
       if (scanResult.scoring && scanResult.scoring.advise && scanResult.scoring.advise.length > 0)
         for (const advice of scanResult.scoring.advise) {
           core.info(`:::: Advice for :: ${advice.selector}`)
